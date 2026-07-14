@@ -1,0 +1,67 @@
+/* Simple, non-AI generated CSS style */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+h1, h2 {
+    color: #222;
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #999;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+#bookingsList {
+    list-style-type: none;
+    padding: 0;
+}
+
+#bookingsList li {
+    background: #eee;
+    margin-bottom: 5px;
+    padding: 10px;
+    border-left: 5px solid #333;
+}

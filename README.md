@@ -32,7 +32,7 @@ The profile website source lives in the personal portfolio folder hosted on verc
 - **Live Website (Vercel):** https://portfolio-nu-indol-4etd5vd8ms.vercel.app
 
 ## Repository Link
-- **GitHub Repository:** [https://github.com/paritoshnimhan70000/fsdl-practical-assignments](https://github.com/paritoshnimhan/fsdl-practical-assignments)
+- **GitHub Repository:** [https://github.com/paritoshnimhan/fsdl-practical-assignments](https://github.com/paritoshnimhan/fsdl-practical-assignments)
 
 ## Technologies Used
 Git, GitHub, HTML, CSS, JavaScript, Bootstrap, Node.js, Express, MongoDB, EJS, GitHub Pages, Vercel

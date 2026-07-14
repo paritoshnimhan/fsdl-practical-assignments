@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Analytics Dashboard</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-cloud-bolt"></i>
+                <span>Aether</span>
+            </div>
+            <nav>
+                <a href="#" class="active" data-target="all"><i class="fa-solid fa-house"></i> Dashboard</a>
+                <a href="#" data-target="temp"><i class="fa-solid fa-temperature-half"></i> Temperature</a>
+                <a href="#" data-target="uv"><i class="fa-solid fa-sun"></i> UV Index</a>
+                <a href="#" data-target="wind"><i class="fa-solid fa-wind"></i> Wind</a>
+            </nav>
+            <div class="user-profile">
+                <img src="https://ui-avatars.com/api/?name=Paritosh&background=0ea5e9&color=fff" alt="User">
+                <div class="user-info">
+                    <h4>Paritosh</h4>
+                    <p>Free Plan</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <div class="search-bar">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <select id="citySelect">
+                        <option value="Pune">Pune, Maharashtra</option>
+                        <option value="Mumbai">Mumbai, Maharashtra</option>
+                        <option value="Delhi">New Delhi, Delhi</option>
+                        <option value="Bangalore">Bangalore, Karnataka</option>
+                    </select>
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+                    <button class="theme-toggle"><i class="fa-solid fa-moon"></i></button>
+                </div>
+            </header>
+
+
+            <div class="dashboard-grid">
+                <!-- Current Weather Card -->
+                <div class="card weather-card big-card" data-tab="all">
+                    <div class="weather-info">
+                        <div class="location">
+                            <h2>San Francisco</h2>
+                            <p>California, PN</p>
+                        </div>
+                        <div class="temp-display">
+                            <span class="temp">22°</span>
+                            <div class="condition">
+                                <i class="fa-solid fa-sun large-icon"></i>
+                                <span>Sunny</span>
+                            </div>
+                        </div>
+                        <div class="weather-details">
+                            <div class="detail">
+                                <i class="fa-solid fa-wind"></i>
+                                <span>12 km/h</span>
+                            </div>
+                            <div class="detail">
+                                <i class="fa-solid fa-droplet"></i>
+                                <span>48%</span>
+                            </div>
+                            <div class="detail">
+                                <i class="fa-solid fa-eye"></i>
+                                <span>10 km</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UV Index -->
+                <div class="card uv-card" data-tab="uv">
+                    <h3>UV Index</h3>
+                    <div class="guage-container">
+                        <canvas id="uvChart"></canvas>
+                        <div class="uv-value">
+                            <span id="uvValue">5</span>
+                            <small>Moderate</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wind Status -->
+                <div class="card wind-card" data-tab="wind">
+                    <h3>Wind Status</h3>
+                    <div class="wind-compass">
+                        <div class="compass-circle">
+                            <i class="fa-solid fa-location-arrow arrow"></i>
+                        </div>
+                        <div class="wind-details">
+                            <div class="wind-speed">
+                                <span class="value">12</span>
+                                <span class="unit">km/h</span>
+                            </div>
+                            <p class="text-secondary">Direction: NE</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Temperature Trend Chart -->
+                <div class="card chart-card wide-card" data-tab="temp">
+                    <div class="card-header">
+                        <h3>Temperature Forecast</h3>
+                        <select class="time-range">
+                            <option>Weekly</option>
+                            <option>Monthly</option>
+                        </select>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="tempChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chance of Rain -->
+                <div class="card rainfall-card" data-tab="rain">
+                    <h3>Chance of Rain</h3>
+                    <div class="chart-container">
+                        <canvas id="rainChart"></canvas>
+                    </div>
+                </div>
+
+
+
+                <!-- 7 Day Forecast List -->
+                <div class="card forecast-card tall-card" data-tab="forecast">
+                    <h3>7-Day Forecast</h3>
+                    <ul class="forecast-list">
+                        <!-- Populated by JS -->
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

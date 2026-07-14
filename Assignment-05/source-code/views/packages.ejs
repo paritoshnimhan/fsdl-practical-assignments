@@ -1,0 +1,37 @@
+<%- include('partials/header') %>
+
+<div class="page-header">
+    <div class="container">
+        <h1 class="page-title text-center">All Destinations</h1>
+        <p class="page-subtitle text-center">Find your perfect escape from our curated collection.</p>
+    </div>
+</div>
+
+<section class="packages-list container">
+    <div class="packages-grid">
+        <% packages.forEach(pkg => { %>
+            <div class="package-card">
+                <div class="card-img-wrapper">
+                    <img src="<%= pkg.image %>" alt="<%= pkg.title %>">
+                </div>
+                <div class="card-body">
+                    <div class="price-tag">$<%= pkg.price %></div>
+                    <h3><%= pkg.title %></h3>
+                    <div class="meta-data">
+                        <span class="duration">Duration: <%= pkg.duration %></span>
+                    </div>
+                    <div>
+                        <strong>Destinations: </strong>
+                        <% pkg.destinations.forEach(dest => { %>
+                            <span><%= dest %> </span>
+                        <% }) %>
+                    </div>
+                    <p class="card-desc"><%= pkg.description %></p>
+                    <a href="/book/<%= pkg._id %>" class="btn btn-primary">Reserve Your Spot</a>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</section>
+
+<%- include('partials/footer') %>

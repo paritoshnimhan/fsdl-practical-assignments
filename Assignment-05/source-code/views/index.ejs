@@ -1,0 +1,40 @@
+<%- include('partials/header') %>
+
+<section class="hero-section">
+    <div class="container hero-content">
+        <h1 class="hero-title">Welcome to Aura Travel</h1>
+        <p class="hero-subtitle">Find your next vacation destination here.</p>
+        <a href="/packages" class="btn btn-primary hero-btn">Explore Destinations</a>
+    </div>
+</section>
+
+<section class="featured-packages container">
+    <div class="section-heading">
+        <h2>Featured Experiences</h2>
+    </div>
+    
+    <div class="packages-grid">
+        <% packages.forEach(pkg => { %>
+            <div class="package-card">
+                <div class="card-img-wrapper">
+                    <img src="<%= pkg.image %>" alt="<%= pkg.title %>">
+                </div>
+                <div class="card-body">
+                    <div class="price-tag">$<%= pkg.price %></div>
+                    <h3><%= pkg.title %></h3>
+                    <div class="meta-data">
+                        <span class="duration">Duration: <%= pkg.duration %></span>
+                    </div>
+                    <p class="card-desc"><%= pkg.description %></p>
+                    <a href="/book/<%= pkg._id %>" class="btn btn-outline">Book Now</a>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+    
+    <div class="center-btn mt-4 text-center">
+        <a href="/packages" class="btn btn-secondary">View All Packages</a>
+    </div>
+</section>
+
+<%- include('partials/footer') %>

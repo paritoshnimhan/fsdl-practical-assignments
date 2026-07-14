@@ -1,0 +1,45 @@
+<%- include('partials/header') %>
+
+<section class="success-section container text-center">
+    <div class="success-card">
+        <h1>Booking Confirmed!</h1>
+        <p class="success-subtitle">Thank you, <strong><%= booking.customerName %></strong>. Your reservation for <strong><%= pkg.title %></strong> has been successfully received.</p>
+        
+        <div class="booking-receipt">
+            <p><strong>Booking ID:</strong> <%= booking._id %></p>
+            <p><strong>Travel Date:</strong> <%= new Date(booking.travelDate).toLocaleDateString() %></p>
+            <p><strong>Travelers:</strong> <%= booking.numberOfTravelers %></p>
+            <p><strong>Total Amount:</strong> $<%= booking.totalPrice %></p>
+        </div>
+
+        <div class="actions mt-4">
+            <a href="/" class="btn btn-outline">Return Home</a>
+            <a href="/packages" class="btn btn-primary">Discover More</a>
+        </div>
+    </div>
+</section>
+
+<style>
+.success-section {
+    padding: 50px 20px;
+}
+.success-card {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    background: #fff;
+    border: 1px solid #ccc;
+}
+.booking-receipt {
+    margin-top: 20px;
+    background: #f9f9f9;
+    padding: 20px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+.booking-receipt p {
+    margin-bottom: 10px;
+}
+</style>
+
+<%- include('partials/footer') %>

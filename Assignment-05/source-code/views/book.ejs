@@ -1,0 +1,77 @@
+<%- include('partials/header') %>
+
+<div class="page-header">
+    <div class="container container-small">
+        <h1 class="page-title text-center">Complete Booking</h1>
+    </div>
+</div>
+
+<section class="booking-section container container-small">
+    <div class="booking-card">
+        <div class="booking-summary">
+            <div class="summary-img">
+                <img src="<%= pkg.image %>" alt="<%= pkg.title %>">
+            </div>
+            <div class="summary-details">
+                <h2><%= pkg.title %></h2>
+                <div class="price-info">
+                    <span class="label">Price per person:</span>
+                    <span class="value">$<%= pkg.price %></span>
+                </div>
+                <div class="duration-info">
+                    <span class="label">Duration:</span>
+                    <span class="value"><%= pkg.duration %></span>
+                </div>
+            </div>
+        </div>
+
+        <form action="/book/<%= pkg._id %>" method="POST" class="booking-form">
+            <div class="form-group">
+                <label for="customerName">Full Name</label>
+                <input type="text" id="customerName" name="customerName" class="form-control" required placeholder="John Doe">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" class="form-control" required placeholder="john@example.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" class="form-control" required placeholder="+1 234 567 8900">
+            </div>
+            
+            <div class="form-group">
+                <label for="travelDate">Select Travel Date</label>
+                <input type="date" id="travelDate" name="travelDate" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="numberOfTravelers">Number of Travelers</label>
+                <input type="number" id="numberOfTravelers" name="numberOfTravelers" class="form-control" min="1" value="1" required>
+            </div>
+
+            <div class="total-bar">
+                <span>Total Expected:</span>
+                <span class="total-price" id="totalPriceDisplay">$<%= pkg.price %></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-4">Confirm Booking</button>
+        </form>
+    </div>
+</section>
+
+<script>
+    // Simple script to update total price dynamically
+    const pricePerPerson = <%= pkg.price %>;
+    const inputTravelers = document.getElementById('numberOfTravelers');
+    const displayTotal = document.getElementById('totalPriceDisplay');
+    
+    inputTravelers.addEventListener('input', (e) => {
+        const travelers = parseInt(e.target.value) || 0;
+        const total = pricePerPerson * travelers;
+        displayTotal.innerText = '$' + total.toLocaleString();
+    });
+</script>
+
+<%- include('partials/footer') %>

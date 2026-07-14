@@ -26,15 +26,13 @@ proofs, and the profile website live together in this single public repository.
 Each assignment folder contains `source-code/`, `output-screenshots/`, and its own `README.md`.
 
 ## Personal Profile Website
-The profile website source lives in the [`docs/`](./docs) folder and is deployed
-from this same repository. It is the portfolio from Assignment 02.
+The profile website source lives in the personal portfolio folder. It is the portfolio from Assignment 02.
 
 ## Hosted Website Links
-- **Live Website (GitHub Pages):** https://paritoshnimhan70000.github.io/fsdl-practical-assignments/
-- **Live Website (Vercel):** https://<YOUR-VERCEL-URL>.vercel.app
+- **Live Website (Vercel):** [https://<YOUR-VERCEL-URL>.vercel.app](https://portfolio-nu-indol-4etd5vd8ms.vercel.app)
 
 ## Repository Link
-- **GitHub Repository:** https://github.com/paritoshnimhan70000/fsdl-practical-assignments
+- **GitHub Repository:** [https://github.com/paritoshnimhan70000/fsdl-practical-assignments](https://github.com/paritoshnimhan/fsdl-practical-assignments)
 
 ## Technologies Used
 Git, GitHub, HTML, CSS, JavaScript, Bootstrap, Node.js, Express, MongoDB, EJS, GitHub Pages, Vercel

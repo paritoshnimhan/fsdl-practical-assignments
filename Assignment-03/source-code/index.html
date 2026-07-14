@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MyMart | Fashion Store</title>
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar bg-white shadow-sm px-4">
+        <span class="navbar-brand fw-bold">MyMart</span>
+
+        <div class="d-flex align-items-center">
+            <input class="form-control me-3 search-box" placeholder="Search for clothes">
+            🛒 Cart <span id="cart-count" class="badge bg-dark ms-1">0</span>
+        </div>
+    </nav>
+
+    <!-- OFFER BANNER -->
+    <div class="container mt-3">
+        <div class="offer-banner text-center">
+            🔥 GET UP TO 50% OFF ON WINTER COLLECTION 🔥
+        </div>
+    </div>
+    <!-- CATEGORY ICONS -->
+    <div class="container mt-4">
+        <div class="row g-3 text-center">
+
+            <div class="col">
+                <div class="category-card active" onclick="filterCategory('all', this)">
+                    <i class="bi bi-grid-fill"></i>
+                    <span>All</span>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="category-card" onclick="filterCategory('tshirt', this)">
+                    <i class="bi bi-person-fill"></i>
+                    <span>T-Shirts</span>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="category-card" onclick="filterCategory('shirt', this)">
+                    <i class="bi bi-bag-fill"></i>
+                    <span>Shirts</span>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="category-card" onclick="filterCategory('pants', this)">
+                    <i class="bi bi-scissors"></i>
+                    <span>Pants</span>
+                </div>
+            </div>
+
+            <<div class="col">
+                <div class="category-card" onclick="filterCategory('shoes', this)">
+                    <i class="bi bi-box-seam"></i>
+                    <span>Shoes</span>
+                </div>
+        </div>
+
+
+        <div class="col">
+            <div class="category-card" onclick="filterCategory('watch', this)">
+                <i class="bi bi-watch"></i>
+                <span>Watches</span>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+
+    <!-- PRODUCTS -->
+    <div class="container mt-4">
+        <div class="row g-4" id="product-list">
+
+            <!-- T-SHIRT -->
+            <div class="col-md-3 product tshirt">
+                <div class="product-card">
+                    <img src="images/t-shirt.png" alt="T-Shirt">
+                    <h6>T-Shirt</h6>
+                    <p>₹999</p>
+                    <button class="btn btn-outline-dark w-100" onclick="handleAddToCart('T-Shirt')">
+                        + Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- SHIRT -->
+            <div class="col-md-3 product shirt">
+                <div class="product-card">
+                    <img src="images/shirt.png" alt="Casual Shirt">
+                    <h6>Casual Shirt</h6>
+                    <p>₹1499</p>
+                    <button class="btn btn-outline-dark w-100" onclick="handleAddToCart('Shirt')">
+                        + Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- PANTS -->
+            <div class="col-md-3 product pants">
+                <div class="product-card">
+                    <img src="images/pants.png">
+                    <h6>Denim Pants</h6>
+                    <p>₹1799</p>
+                    <button class="btn btn-outline-dark w-100" onclick="handleAddToCart('Pants')">
+                        + Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- SHOES -->
+            <div class="col-md-3 product shoes">
+                <div class="product-card">
+                    <img src="images/shoe.png" alt="Shoes">
+                    <h6>Sports Shoes</h6>
+                    <p>₹2999</p>
+                    <button class="btn btn-outline-dark w-100" onclick="handleAddToCart('Shoes')">
+                        + Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- WATCH -->
+            <div class="col-md-3 product watch">
+                <div class="product-card">
+                    <img src="images/watch.png">
+                    <h6>Wrist Watch</h6>
+                    <p>₹3499</p>
+                    <button class="btn btn-outline-dark w-100" onclick="handleAddToCart('Watch')">
+                        + Add to Cart
+                    </button>
+                </div>
+            </div>
+
+
+            <!-- MEN JACKET -->
+            <div class="col-md-3 product jacket">
+                <div class="product-card">
+                    <img src="images/jacket.png">
+                    <h6>Men Jacket</h6>
+                    <p>₹1999</p>
+                    <button class="btn btn-outline-dark w-100" onclick="handleAddToCart('Men Jacket')">
+                        + Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- WOMEN DRESS -->
+            <div class="col-md-3 product dress">
+                <div class="product-card">
+                    <img src="images/dress.png">
+                    <h6>Women Dress</h6>
+                    <p>₹2499</p>
+                    <button class="btn btn-outline-dark w-100" onclick="handleAddToCart('Women Dress')">
+                        + Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- HOODIE -->
+            <div class="col-md-3 product hoodie">
+                <div class="product-card">
+                    <img src="images/hoodie.png">
+                    <h6>Hoodie</h6>
+                    <p>₹1499</p>
+                    <button class="btn btn-outline-dark w-100" onclick="handleAddToCart('Hoodie')">
+                        + Add to Cart
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <!-- LOGIN MODAL -->
+    <div class="modal fade" id="loginModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Login Required</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input id="username" class="form-control mb-2" placeholder="Username">
+                    <input id="password" type="password" class="form-control mb-2" placeholder="Password">
+                    <button class="btn btn-dark w-100" onclick="login()">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

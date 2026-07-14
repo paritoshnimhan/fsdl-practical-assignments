@@ -1,0 +1,73 @@
+body {
+    background: #f6f7fb;
+}
+
+.search-box {
+    width: 250px;
+}
+
+.offer-banner {
+    background: linear-gradient(to right, #ff5f6d, #ffc371);
+    color: white;
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: bold;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+}
+
+.product-card {
+    background: white;
+    border-radius: 14px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-card img {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.row > .col button {
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.category-card {
+    background: white;
+    border-radius: 14px;
+    padding: 15px 10px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.category-card i {
+    font-size: 24px;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.category-card span {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.category-card:hover {
+    transform: translateY(-4px);
+}
+
+.category-card.active {
+    background: #212529;
+    color: white;
+}

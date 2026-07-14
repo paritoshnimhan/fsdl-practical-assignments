@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Feedback System</title>
+    <!-- React CDNs -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/regenerator-runtime@0.14.0/runtime.min.js"></script>
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Axios for API calls -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f9fafb;
+            color: #333;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 2rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #2563eb;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            color: #1e3a8a;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            border: 1px solid #2563eb;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-danger {
+            background: white;
+            color: #dc2626;
+            border: 1px solid #dc2626;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        .btn-outline {
+            background: white;
+            color: #2563eb;
+        }
+
+        .btn-outline:hover {
+            background: #eff6ff;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.25rem;
+            font-weight: bold;
+            color: #4b5563;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .stars span {
+            color: #d1d5db;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .stars span.active {
+            color: #2563eb;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .card {
+            border: 1px solid #e5e7eb;
+            padding: 1rem;
+            border-radius: 4px;
+            background-color: #f8fafc;
+        }
+
+        /* Replacing glass-panel with simple styling */
+        .glass-panel {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            padding: 2rem;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Custom Star Rating Component
+        const StarRating = ({ rating, setRating }) => {
+            return (
+                <div className="stars">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                        <span 
+                            key={star} 
+                            className={star <= rating ? 'active' : ''} 
+                            onClick={() => setRating(star)}
+                        >
+                            ★
+                        </span>
+                    ))}
+                </div>
+            );
+        };
+
+        // Static View Stars component
+        const ViewStars = ({ rating }) => {
+            const safeRating = Math.max(0, Math.min(5, Number(rating) || 0));
+            return (
+                <div style={{color: '#fbbf24'}}>
+                    {'★'.repeat(safeRating)}{'☆'.repeat(5 - safeRating)}
+                </div>
+            );
+        }
+
+        const App = () => {
+            const [view, setView] = useState('submit'); // 'submit' or 'all'
+            const [feedbacks, setFeedbacks] = useState([]);
+            
+            // Notification Message
+            const [message, setMessage] = useState('');
+
+            // Form State
+            const [formData, setFormData] = useState({ name: '', course: '', rating: 5, feedback: '' });
+
+            // Edit State
+            const [editingId, setEditingId] = useState(null);
+            const [editData, setEditData] = useState({});
+
+            const fetchFeedbacks = async () => {
+                try {
+                    const res = await axios.get('/api/feedbacks');
+                    setFeedbacks(res.data);
+                } catch (err) {
+                    console.error(err);
+                }
+            };
+
+            useEffect(() => {
+                if (view === 'all') fetchFeedbacks();
+            }, [view]);
+
+            const showMessage = (msg) => {
+                setMessage(msg);
+                setTimeout(() => setMessage(''), 3000);
+            };
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                try {
+                    await axios.post('/api/feedbacks', formData);
+                    setFormData({ name: '', course: '', rating: 5, feedback: '' });
+                    showMessage('Feedback submitted successfully!');
+                    setView('all');
+                } catch (err) {
+                    alert(err.response?.data?.error || 'Error submitting form');
+                }
+            };
+
+            const handleDelete = async (id) => {
+                if(confirm('Delete this feedback?')) {
+                    try {
+                        await axios.delete(`/api/feedbacks/${id}`);
+                        setFeedbacks(feedbacks.filter(f => f._id !== id));
+                        showMessage('Feedback deleted');
+                    } catch (err) {
+                        alert('Failed to delete');
+                    }
+                }
+            };
+
+            const handleEditStart = (fb) => {
+                setEditingId(fb._id);
+                setEditData({ ...fb });
+            };
+
+            const handleEditSave = async () => {
+                try {
+                    const res = await axios.put(`/api/feedbacks/${editingId}`, editData);
+                    setFeedbacks(feedbacks.map(f => f._id === editingId ? res.data : f));
+                    setEditingId(null);
+                    showMessage('Feedback updated');
+                } catch (err) {
+                    alert('Update failed');
+                }
+            };
+
+            return (
+                <div className="container">
+                    <header className="header">
+                        <h1>Student Feedback</h1>
+                        <button 
+                            className="btn btn-primary" 
+                            onClick={() => setView(view === 'submit' ? 'all' : 'submit')}
+                        >
+                            {view === 'submit' ? 'View All Feedbacks' : 'Submit Feedback'}
+                        </button>
+                    </header>
+
+                    {message && (
+                        <div style={{background: '#10b981', color: '#fff', padding: '1rem', borderRadius: '8px', marginBottom: '1rem', textAlign: 'center'}}>
+                            {message}
+                        </div>
+                    )}
+
+                    {view === 'submit' ? (
+                        <div className="glass-panel" style={{maxWidth: '600px', margin: '0 auto'}}>
+                            <h2 style={{marginBottom: '1.5rem'}}>We value your feedback</h2>
+                            <form onSubmit={handleSubmit}>
+                                <div className="form-group">
+                                    <label>First & Last Name</label>
+                                    <input required className="form-control" type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
+                                </div>
+                                <div className="form-group">
+                                    <label>Course Name</label>
+                                    <input required className="form-control" type="text" value={formData.course} onChange={e => setFormData({...formData, course: e.target.value})} />
+                                </div>
+                                <div className="form-group">
+                                    <label>Rating</label>
+                                    <StarRating rating={formData.rating} setRating={(r) => setFormData({...formData, rating: r})} />
+                                </div>
+                                <div className="form-group">
+                                    <label>Comments</label>
+                                    <textarea required className="form-control" rows="4" value={formData.feedback} onChange={e => setFormData({...formData, feedback: e.target.value})}></textarea>
+                                </div>
+                                <button type="submit" className="btn btn-primary" style={{width: '100%'}}>Submit Review</button>
+                            </form>
+                        </div>
+                    ) : (
+                        <div className="grid">
+                            {feedbacks.length === 0 && <p>No feedback found.</p>}
+                            {feedbacks.map(fb => (
+                                <div key={fb._id} className="glass-panel card">
+                                    {editingId === fb._id ? (
+                                        <>
+                                            <input className="form-control" value={editData.name} onChange={e => setEditData({...editData, name: e.target.value})} />
+                                            <input className="form-control" value={editData.course} onChange={e => setEditData({...editData, course: e.target.value})} />
+                                            <StarRating rating={editData.rating} setRating={(r) => setEditData({...editData, rating: r})} />
+                                            <textarea className="form-control" value={editData.feedback} onChange={e => setEditData({...editData, feedback: e.target.value})}></textarea>
+                                            <div className="card-actions">
+                                                <button className="btn btn-primary" onClick={handleEditSave} style={{flex: 1}}>Save</button>
+                                                <button className="btn btn-outline" onClick={() => setEditingId(null)} style={{flex: 1}}>Cancel</button>
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <div>
+                                                <h3 style={{marginBottom: '0.2rem'}}>{fb.name}</h3>
+                                                <div style={{color: 'var(--primary)', fontSize: '0.9rem'}}>{fb.course}</div>
+                                            </div>
+                                            <ViewStars rating={fb.rating} />
+                                            <p style={{color: 'var(--text-muted)'}}>"{fb.feedback}"</p>
+                                            <div className="card-actions">
+                                                <button className="btn btn-outline" onClick={() => handleEditStart(fb)}>Edit</button>
+                                                <button className="btn btn-danger" onClick={() => handleDelete(fb._id)}>Delete</button>
+                                            </div>
+                                        </>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

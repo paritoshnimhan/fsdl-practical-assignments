@@ -2,10 +2,10 @@
 
 ## Student Details
 - **Name:** Paritosh Nimhan
-- **Roll No:** <YOUR ROLL NUMBER>
-- **Class:** <YOUR CLASS>
-- **Division:** <YOUR DIVISION>
-- **Subject:** Full Stack Development Lab (FSDL)
+- **Roll No:** 123B1B212
+- **Class:** B.Tech C
+- **Division:** C
+- **Subject:** DevOps
 
 ## Repository Description
 This repository contains all previous FSDL practical assignments (01-07) along
@@ -26,22 +26,17 @@ proofs, and the profile website live together in this single public repository.
 Each assignment folder contains `source-code/`, `output-screenshots/`, and its own `README.md`.
 
 ## Personal Profile Website
-The profile website source lives in the [`docs/`](./docs) folder and is deployed
-from this same repository. It is the portfolio from Assignment 02.
+The profile website source lives in the personal portfolio folder hosted on vercel. It is the portfolio from Assignment 02.
 
 ## Hosted Website Links
-- **Live Website (GitHub Pages):** https://paritoshnimhan70000.github.io/fsdl-practical-assignments/
-- **Live Website (Vercel):** https://<YOUR-VERCEL-URL>.vercel.app
+- **Live Website (Vercel):** https://portfolio-nu-indol-4etd5vd8ms.vercel.app
 
 ## Repository Link
-- **GitHub Repository:** https://github.com/paritoshnimhan70000/fsdl-practical-assignments
+- **GitHub Repository:** [https://github.com/paritoshnimhan70000/fsdl-practical-assignments](https://github.com/paritoshnimhan/fsdl-practical-assignments)
 
 ## Technologies Used
 Git, GitHub, HTML, CSS, JavaScript, Bootstrap, Node.js, Express, MongoDB, EJS, GitHub Pages, Vercel
 
-## Notes
-- `node_modules/` and real `.env` files are intentionally excluded (see `.gitignore`).
-  For the Node apps (05-07), copy `.env.example` to `.env` and set your own values.
 
 ## Proof of Implementation
 See [`PROOF.md`](./PROOF.md) for the screenshot checklist.
